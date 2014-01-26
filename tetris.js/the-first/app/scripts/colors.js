@@ -1,9 +1,10 @@
-var green = '#3bd44a';
-var purple = '#9438d2';
-var red = '#d63031';
-var orange = '#f77e29';
-var blue = '#4146e8';
-var cyan = '#2ce4e8';
-var yellow = '#f8d863';
+window.green = '#3bd44a';
+window.purple = '#9438d2';
+window.red = '#d63031';
+window.orange = '#f77e29';
+window.blue = '#4146e8';
+window.cyan = '#2ce4e8';
+window.yellow = '#f8d863';
+window.none = '';
 
-window.colors = [green, purple, red, orange, blue, cyan, yellow];
+window.colors = [none, green, purple, red, orange, blue, cyan, yellow];

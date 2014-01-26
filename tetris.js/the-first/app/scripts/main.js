@@ -1,45 +1,26 @@
-function Cell(div){
-	this.el = div;
-}
-
-Cell.prototype = Object.create(null, {
-	color: {
-		get: function(){
-			return this.el.style.backgroundColor;
-		},
-		set: function(color){
-			this.el.style.backgroundColor = color;
-		}
-	}
-});
 
 
 
-$(document).on('keydown', function(event){
-    var key = vkey[event.keyCode];
-    $('#current-key').text(key);
-    if(key == 'J'){
-    	setSomeGuy();
-    }
-});
+
 
 var $tetris = $('#tetris');
 
-var cells_wide = 300 / 50;
-var cells_tall = 400 / 50;
+var columns = 300 / 50;
+var rows = 400 / 50;
 
 var board = [];
+for (var i = 0; i < columns; i++){
+	board.push([]);
+}
 
 
-for(var i = 0; i < cells_tall; i++){
-	var col = [];
-	board.push(col);
-	for (var j = 0; j < cells_wide; j++){
+for(var i = 0; i < rows; i++){
+	for (var j = 0; j < columns; j++){
 		var div = document.createElement('div');
 		div.className = 'cell';
 		$tetris.append(div);
 		var cell = new Cell(div);
-		col.push(cell);
+		board[j][i] = cell;
 	}
 }
 
@@ -48,9 +29,34 @@ function setSomeGuy(){
 }
 
 
-
-
 $tetris.on('click', '.cell', function(event){
 	console.log('click');
 	$(this).toggleClass('clicked');
 })
+
+
+var handlers = {
+	'J': setSomeGuy
+}
+
+$(document).on('keydown', function(event){
+    var key = vkey[event.keyCode];
+    $('#current-key').text(key);
+    if (handlers[key]) handlers[key]();
+});
+
+
+var testPiece = new Piece([new Tile(1,1), new Tile(2,1), new Tile(2,2), new Tile(2,3)], blue);
+testPiece.stamp();
+handlers['<right>'] = function(){
+	var righter = testPiece.copy();
+	righter.move_right();
+	console.log('trying');
+	if(righter.is_valid()){
+		console.log('shold move!');
+		testPiece.clear();
+		testPiece = righter;
+		testPiece.stamp();
+	}
+	else console.log('nope!');
+}
