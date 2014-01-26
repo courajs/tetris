@@ -25,14 +25,19 @@ body {
     letter-spacing: -1px;
 }
 
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
 #tetris {
-    height: 400px;
-    width: 300px;
+    height: 402px;
+    width: 302px;
     border: 1px solid black;
+}
+.cell {
+    float: left;
+    height: 50px;
+    width: 50px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.cell.clicked {
+    background-color: black;
 }
