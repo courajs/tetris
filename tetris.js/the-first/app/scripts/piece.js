@@ -41,6 +41,28 @@ Piece.prototype.move_left = function(){
 	});
 }
 
+Piece.prototype.try_right = function(){
+	var righter = this.copy();
+	righter.move_right();
+	if (righter.is_valid()){
+		this.clear();
+		this.tiles = righter.tiles;
+		this.stamp();
+	}
+}
+
+Piece.prototype.try_left = function(){
+	var lefter = this.copy();
+	lefter.move_left();
+	if (lefter.is_valid()){
+		this.clear();
+		this.tiles = lefter.tiles;
+		this.stamp();
+	}
+}
+
+
+
 Piece.prototype.stick = function(){
 	console.assert(this.is_valid(), 'Trying to stick an invalid piece');
 	var color = this.color;

@@ -49,14 +49,8 @@ $(document).on('keydown', function(event){
 var testPiece = new Piece([new Tile(1,1), new Tile(2,1), new Tile(2,2), new Tile(2,3)], blue);
 testPiece.stamp();
 handlers['<right>'] = function(){
-	var righter = testPiece.copy();
-	righter.move_right();
-	console.log('trying');
-	if(righter.is_valid()){
-		console.log('shold move!');
-		testPiece.clear();
-		testPiece = righter;
-		testPiece.stamp();
-	}
-	else console.log('nope!');
+	testPiece.try_right();
+};
+handlers['<left>'] = function(){
+	testPiece.try_left();
 }
