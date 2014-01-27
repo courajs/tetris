@@ -27,14 +27,18 @@ $(document).on('keydown', function(event){
 });
 
 
-var test_piece = new Piece([new Tile(1,1), new Tile(2,1), new Tile(2,2), new Tile(2,3)], blue);
+var test_piece = new I_Piece(3, 0);
 test_piece.stamp();
 handlers['<right>'] = function(){
-	test_piece.try_right();
+	test_piece = test_piece.try_right();
 };
 handlers['<left>'] = function(){
-	test_piece.try_left();
+	test_piece = test_piece.try_left();
 }
 handlers['<down>'] = function(){
-	test_piece.fall();
+	test_piece = test_piece.fall();
+	if (test_piece.is_stuck()) handlers = {};
+}
+handlers['<up>'] = function(){
+	test_piece = test_piece.try_rotate();
 }
