@@ -47,6 +47,8 @@ Piece.prototype.move_left = function(){
 	});
 }
 
+Piece.prototype.rotate = function(){};
+
 Piece.prototype.try_right = function(){
 	if(this.stuck) throw 'Calling right on an already stuck piece'
 	var right = this.copy();

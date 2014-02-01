@@ -10,7 +10,7 @@ body {
 
 .hero-unit {
     margin: 50px auto 0 auto;
-    width: 420px;
+    width: 422px;
     font-size: 18px;
     font-weight: 200;
     line-height: 30px;
@@ -26,14 +26,13 @@ body {
 }
 
 #tetris {
-    height: 402px;
-    width: 302px;
-    border: 1px solid black;
+    border: 1px solid black;    
 }
+
 .cell {
     float: left;
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
 }

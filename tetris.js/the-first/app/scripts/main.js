@@ -1,22 +1,10 @@
 var $tetris = $('#tetris');
+var columns = 10;
+var rows = 16;
+var cell_size = 30;
 
-var columns = 300 / 50;
-var rows = 400 / 50;
+var board = new Board($tetris, rows, columns, cell_size);
 
-var board = [];
-for (var i = 0; i < columns; i++){
-	board.push([]);
-}
-
-for(var i = 0; i < rows; i++){
-	for (var j = 0; j < columns; j++){
-		var div = document.createElement('div');
-		div.className = 'cell';
-		$tetris.append(div);
-		var cell = new Cell(div);
-		board[j][i] = cell;
-	}
-}
 
 var handlers = {}
 
@@ -26,9 +14,21 @@ $(document).on('keydown', function(event){
     if (handlers[key]) handlers[key]();
 });
 
+var center = Math.floor(columns / 2);
 
-var test_piece = new I_Piece(3, 0);
-test_piece.stamp();
+var new_piece = function(){
+	var Piece_Subtype = pieces.random();
+	var piece = new Piece_Subtype(center, 0);
+	piece.stamp();
+	if (! piece.is_valid()) {
+		alert('you looooooooose!');
+		handlers = {};
+	}
+	return piece;
+}
+
+var test_piece = new new_piece();
+
 handlers['<right>'] = function(){
 	test_piece = test_piece.try_right();
 };
@@ -37,7 +37,9 @@ handlers['<left>'] = function(){
 }
 handlers['<down>'] = function(){
 	test_piece = test_piece.fall();
-	if (test_piece.is_stuck()) handlers = {};
+	if (test_piece.is_stuck()) {
+		test_piece = new_piece();
+	}
 }
 handlers['<up>'] = function(){
 	test_piece = test_piece.try_rotate();

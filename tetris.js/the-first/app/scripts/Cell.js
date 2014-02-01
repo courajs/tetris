@@ -13,3 +13,8 @@ Cell.prototype = Object.create(null, {
 		}
 	}
 });
+
+Cell.prototype.clear = function(){
+	this.color = none;
+	this.solid = false;
+}

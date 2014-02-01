@@ -40,3 +40,26 @@ I_Piece.prototype.rotate = function(){
 		return;
 	}
 }
+
+O_Piece = function(x, y){
+	var copy_target, tiles, rotation;
+	if (x instanceof O_Piece){
+		copy_target = x;
+		tiles = copy_target.tiles.map(function(tile){
+			return tile.copy();
+		});
+		return new O_Piece(tiles);
+	}
+	if (x instanceof Array)
+		tiles = x;
+	else {
+		var center = new Tile(x,y);
+		tiles = [center, new Tile(x+1, y), new Tile(x, y + 1), new Tile(x+1, y+1)];
+	}
+	this.tiles = tiles;
+}
+O_Piece.prototype = Object.create(Piece.prototype);
+O_Piece.prototype.constructor = O_Piece;
+O_Piece.prototype.color = yellow;
+
+pieces = [I_Piece, O_Piece];
