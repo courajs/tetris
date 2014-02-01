@@ -1,19 +1,12 @@
-function Piece(tiles, color){
-	if (tiles instanceof Piece) {
-		var copy_target = tiles;
-		color = copy_target.color;
-		tiles = copy_target.tiles.map(function(tile){
-			return tile.copy();
-		});
-		return new Piece(tiles, color);
-	}
+function Piece(tiles){
 	this.tiles = tiles;
-	this.color = color;
 	this.stuck = false;
 }
 
 Piece.prototype.copy = function(){
-	return new this.constructor(this);
+	var tiles = this.tiles.map(function(tile){return tile.copy();});
+	var rotation = this.rotation
+	return new this.constructor(tiles, rotation);
 }
 
 Piece.prototype.is_valid = function(){

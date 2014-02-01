@@ -1,13 +1,13 @@
+function extend_piece(Subtype, color){
+	Subtype.prototype = Object.create(Piece.prototype);
+	Subtype.prototype.constructor = Subtype;
+	Subtype.prototype.color = color;
+}
+
+
+
 function I_Piece(x, y){
-	var copy_target, tiles, rotation;
-	if(x instanceof I_Piece){
-		copy_target = x;
-		tiles = copy_target.tiles.map(function(tile){
-			return tile.copy();
-		});
-		rotation = copy_target.rotation;
-		return new I_Piece(tiles, rotation);
-	}
+	var tiles, rotation;
 	if (x instanceof Array){
 		tiles = x;
 		rotation = y;
@@ -20,11 +20,9 @@ function I_Piece(x, y){
 	this.tiles = tiles;
 	this.rotation = rotation;
 }
-I_Piece.prototype = Object.create(Piece.prototype);
-I_Piece.prototype.constructor = I_Piece;
+extend_piece(I_Piece, cyan);
 I_Piece.down = 'down';
 I_Piece.up = 'up';
-I_Piece.prototype.color = cyan;
 I_Piece.prototype.rotate = function(){
 	var center = this.tiles[0];
 	var x = center.x;
@@ -41,15 +39,14 @@ I_Piece.prototype.rotate = function(){
 	}
 }
 
+
+
+
+
+
+
 O_Piece = function(x, y){
-	var copy_target, tiles, rotation;
-	if (x instanceof O_Piece){
-		copy_target = x;
-		tiles = copy_target.tiles.map(function(tile){
-			return tile.copy();
-		});
-		return new O_Piece(tiles);
-	}
+	var tiles;
 	if (x instanceof Array)
 		tiles = x;
 	else {
@@ -58,8 +55,20 @@ O_Piece = function(x, y){
 	}
 	this.tiles = tiles;
 }
-O_Piece.prototype = Object.create(Piece.prototype);
-O_Piece.prototype.constructor = O_Piece;
-O_Piece.prototype.color = yellow;
+extend_piece(O_Piece, yellow);
+
+
+
+
+
+
+T_Piece = function(){
+
+}
+
+
+
+
+
 
 pieces = [I_Piece, O_Piece];
