@@ -43,7 +43,6 @@ Piece.prototype.move_left = function(){
 Piece.prototype.rotate = function(){};
 
 Piece.prototype.try_right = function(){
-	if(this.stuck) throw 'Calling right on an already stuck piece'
 	var right = this.copy();
 	right.move_right();
 	if (right.is_valid()){
@@ -55,7 +54,6 @@ Piece.prototype.try_right = function(){
 }
 
 Piece.prototype.try_left = function(){
-	if (this.stuck) throw 'Calling left on an already stuck piece';
 	var lefter = this.copy();
 	lefter.move_left();
 	if (lefter.is_valid()){
@@ -67,7 +65,6 @@ Piece.prototype.try_left = function(){
 }
 
 Piece.prototype.try_rotate = function(){
-	if (this.stuck) throw 'Calling rotate on an already stuck piece';
 	var rotated = this.copy();
 	rotated.rotate();
 	if (rotated.is_valid()){
@@ -79,7 +76,6 @@ Piece.prototype.try_rotate = function(){
 }
 
 Piece.prototype.fall = function(){
-	if (this.stuck) throw 'Calling fall on an already stuck piece';
 	var down = this.copy();
 	down.move_down();
 	if (down.is_valid()){
